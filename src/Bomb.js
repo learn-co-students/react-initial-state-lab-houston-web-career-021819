@@ -6,7 +6,12 @@ export default class Bomb extends React.Component {
     super(props);
     this.state = { secondsLeft: this.props.initialCount };
 
-    setInterval(this.decrementOne, 1000);
+    let countDown = setInterval(() => {
+      this.decrementOne();
+      if (this.state.secondsLeft <= 0) {
+        clearInterval(countDown);
+      }
+    }, 1000);
   }
 
   render() {
